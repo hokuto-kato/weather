@@ -1,0 +1,25 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"plugin:vue/vue3-essential",
+		"standard-with-typescript",
+		"prettier"
+	],
+	"overrides": [],
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"project": ["tsconfig.json"]
+	},
+	"plugins": ["vue"],
+	"rules": {
+		"@typescript-eslint/indent": ["error", "tab"],
+		"indent": ["error", "tab"],
+		"no-tabs": ["error", { "allowIndentationTabs": true }],
+		"@typescript-eslint/no-non-null-assertion": "off"
+	},
+	"ignorePatterns": [".eslintrc.*", "vite.config.*"]
+}
