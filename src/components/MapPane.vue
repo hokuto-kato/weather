@@ -8,6 +8,9 @@ const handleClick = (e: { latlng: object }) => {
 </script>
 
 <template>
+	<base-dialog :show="true">
+		<h2>this is dialog</h2>
+	</base-dialog>
 	<l-map
 		style="height: 100vh; width: 100vw"
 		:center="[0, 0]"
@@ -25,7 +28,8 @@ const handleClick = (e: { latlng: object }) => {
 	</l-map>
 </template>
 
-<style scoped lang="sass">
-.leaflet-container
-	background-color: #000
+<style scoped>
+.leaflet-container {
+	background-color: #000;
+}
 </style>
