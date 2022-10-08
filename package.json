@@ -16,6 +16,7 @@
     "leaflet": "^1.9.2",
     "pinia": "^2.0.22",
     "prettier": "^2.7.1",
+    "sass": "^1.55.0",
     "vue": "^3.2.37"
   },
   "devDependencies": {
