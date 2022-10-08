@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MapPane from './components/MapPane.vue'
+</script>
 
 <template>
-	<h1>weather</h1>
+	<map-pane></map-pane>
 </template>
 
 <style scoped></style>

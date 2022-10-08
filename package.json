@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vue-leaflet/vue-leaflet": "^0.6.1",
+    "destyle.css": "^3.0.2",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
+    "leaflet": "^1.9.2",
     "pinia": "^2.0.22",
     "prettier": "^2.7.1",
     "vue": "^3.2.37"
