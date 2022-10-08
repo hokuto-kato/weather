@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet'
 import 'leaflet/dist/leaflet.css'
 const handleClick = (e: { latlng: object }) => {
@@ -28,8 +28,7 @@ const handleClick = (e: { latlng: object }) => {
 	</l-map>
 </template>
 
-<style scoped>
-.leaflet-container {
-	background-color: #000;
-}
+<style lang="sass" scoped>
+.leaflet-container
+	background-color: #000
 </style>
