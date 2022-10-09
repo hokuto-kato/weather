@@ -1,15 +1,33 @@
 <script lang="ts" setup>
 import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet'
+import { useCurrentWeatherStore } from '../stores/currentWeather'
+import { useStore } from '../stores/global'
 import 'leaflet/dist/leaflet.css'
-const handleClick = (e: { latlng: object }) => {
+import { ref } from 'vue'
+
+const globalStore = useStore()
+const cw = useCurrentWeatherStore()
+const show = ref(false)
+const showWeather = (e: { latlng: object }) => {
 	if (!e.latlng) return
-	console.log(e.latlng)
+	globalStore.setLatLng(e.latlng)
+	cw.setCurrentWeather()
+	show.value = true
+}
+const closeDialog = () => {
+	show.value = false
+	cw.clearCurrentWeather()
 }
 </script>
 
 <template>
-	<base-dialog :show="true">
-		<h2>this is dialog</h2>
+	<base-dialog :show="show" @closeDialog="closeDialog">
+		<template #header>
+			<h2>{{ cw.current.name }}</h2>
+		</template>
+		<template #body>
+			<p>{{ cw.current }}</p>
+		</template>
 	</base-dialog>
 	<l-map
 		style="height: 100vh; width: 100vw"
@@ -18,7 +36,7 @@ const handleClick = (e: { latlng: object }) => {
 		:fade-animation="true"
 		:zoom="1"
 		:zoom-control="false"
-		@click="handleClick"
+		@click="showWeather"
 	>
 		<l-tile-layer
 			url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
