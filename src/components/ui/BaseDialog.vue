@@ -1,18 +1,27 @@
 <script lang="ts" setup>
 const props = defineProps(['show'])
+const emits = defineEmits(['closeDialog'])
+const closeDialog = () => {
+	emits('closeDialog')
+}
 </script>
+
 <template>
 	<teleport to="body">
-		<div v-if="props.show" @click="close" class="overlay"></div>
+		<div v-if="props.show" @click="closeDialog" class="overlay"></div>
 		<transition name="dialog">
 			<dialog open class="dialog" v-if="props.show">
-				<section class="dialog__wrap">
-					<slot></slot>
+				<header>
+					<slot name="header"></slot>
+				</header>
+				<section>
+					<slot name="body"></slot>
 				</section>
 			</dialog>
 		</transition>
 	</teleport>
 </template>
+
 <style lang="sass" scoped>
 .overlay
 	position: fixed
@@ -31,12 +40,10 @@ const props = defineProps(['show'])
 	border-radius: 0.375rem
 	border: none
 	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)
-	padding: 0
+	padding: 16px
 	overflow: hidden
 	background-color: #fff
 	z-index: 3
-	&__wrap
-		padding: 16px
 	&-enter-from,
 	&-leave-to
 		opacity: 0
