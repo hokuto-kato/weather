@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useStore } from './global'
+import { useStore } from '@/stores/global'
 
 export const useCurrentWeatherStore = defineStore({
 	id: 'current',

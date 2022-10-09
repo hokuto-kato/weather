@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import MapPane from './components/MapPane.vue'
+import MapPane from '@/components/MapPane.vue'
 </script>
 
 <template>
