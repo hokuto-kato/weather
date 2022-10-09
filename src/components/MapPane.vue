@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet'
-import { useCurrentWeatherStore } from '../stores/currentWeather'
-import { useStore } from '../stores/global'
+import { useCurrentWeatherStore } from '@/stores/currentWeather'
+import { useStore } from '@/stores/global'
 import 'leaflet/dist/leaflet.css'
 import { ref } from 'vue'
 
