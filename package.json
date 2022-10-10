@@ -13,6 +13,8 @@
     "destyle.css": "^3.0.2",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
+    "highcharts": "^10.2.1",
+    "highcharts-vue": "^1.4.0",
     "leaflet": "^1.9.2",
     "pinia": "^2.0.22",
     "prettier": "^2.7.1",
