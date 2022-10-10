@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { computed } from 'vue'
 import { useCurrentWeatherStore } from '@/stores/currentWeather'
 const cw = useCurrentWeatherStore()
