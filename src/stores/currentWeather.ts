@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useStore } from '@/stores/global'
+
 const initialCurrentWeather = {
 	base: '',
 	clouds: {
@@ -66,11 +67,6 @@ export const useCurrentWeatherStore = defineStore({
 		},
 		clearCurrentWeather() {
 			this.current = initialCurrentWeather
-		}
-	},
-	getters: {
-		getCurrentWeather() {
-			return this.current
 		}
 	}
 })

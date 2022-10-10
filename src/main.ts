@@ -10,5 +10,6 @@ const pinia = createPinia()
 
 app.component('base-dialog', BaseDialog)
 app.use(pinia)
+// @ts-ignore
 app.use(HighchartsVue)
 app.mount('#app')
