@@ -8,7 +8,12 @@ export default defineConfig({
 		host: true
 	},
 	css: {
-		devSourcemap: true
+		devSourcemap: true,
+		preprocessorOptions: {
+			sass: {
+				additionalData: `@import "@/assets/sass/main.sass"`
+			}
+		}
 	},
 	plugins: [vue()],
 	resolve: {

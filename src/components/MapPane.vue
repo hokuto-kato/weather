@@ -18,7 +18,7 @@ const showWeather = async (e: { latlng: object }) => {
 	globalStore.setLatLng(e.latlng)
 	await cw.setCurrentWeather()
 	await df.setHourlyForecast()
-	df.setTemperatures()
+	await df.setTemperatures()
 }
 const closeDialog = () => {
 	show.value = false

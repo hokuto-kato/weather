@@ -1,14 +1,12 @@
-import { createApp, defineAsyncComponent } from 'vue'
+import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from '@/App.vue'
 import 'destyle.css'
 import HighchartsVue from 'highcharts-vue'
+import BaseDialog from '@/components/ui/BaseDialog.vue'
 
 const app = createApp(App)
 const pinia = createPinia()
-const BaseDialog = defineAsyncComponent(
-	() => import('@/components/ui/BaseDialog.vue')
-)
 
 app.component('base-dialog', BaseDialog)
 app.use(pinia)
