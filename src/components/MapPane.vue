@@ -40,7 +40,7 @@ const closeDialog = () => {
 		:center="[0, 0]"
 		:zoom-animation="true"
 		:fade-animation="true"
-		:zoom="1"
+		:zoom="3"
 		:zoom-control="false"
 		:inertia="true"
 		:inertiaDeceleration="3000"
@@ -59,5 +59,5 @@ const closeDialog = () => {
 
 <style lang="sass" scoped>
 .leaflet-container
-	background-color: #000
+	background-color: #aad3df
 </style>
