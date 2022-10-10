@@ -16,7 +16,7 @@ const chartOptions = computed(() => {
 			{
 				name: 'temperature',
 				data: df.temperatures,
-				pointStart: Date.parse('2022-10-10 15:00:00'),
+				pointStart: df.startDate,
 				pointInterval: 3600 * 3000
 			}
 		],
@@ -52,6 +52,9 @@ const chartOptions = computed(() => {
 })
 </script>
 <template>
-	<Chart :options="chartOptions" />
+	<Chart :options="chartOptions" class="chart" />
 </template>
-<style scoped></style>
+<style lang="sass" scoped>
+.chart
+	margin-top: 30px
+</style>

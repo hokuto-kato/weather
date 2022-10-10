@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import { useStore } from '@/stores/global'
 
 export const useHourlyForecastStore = defineStore({
-	id: 'daily',
+	id: 'hourly',
 	state: () => {
 		return {
-			daily: {},
-			temperatures: []
+			hourly: {},
+			temperatures: [],
+			startDate: ''
 		}
 	},
 	actions: {
@@ -18,20 +19,17 @@ export const useHourlyForecastStore = defineStore({
 			if (!response.ok) {
 				throw new Error(responseData.message || 'Failed to fetch')
 			}
-			this.daily = responseData
+			this.hourly = responseData
 		},
 		clearHourlyForecast() {
-			this.daily = {}
+			this.hourly = {}
 		},
-		setTemperatures() {
-			this.temperatures = this.daily.list.map(
+		async setTemperatures() {
+			this.temperatures = this.hourly.list.map(
 				(item) => item.main.feels_like
 			)
-		}
-	},
-	getters: {
-		getTemperatures(): number[] {
-			return this.temperatures
+			this.startDate = `${this.hourly.list[0].dt}000`
+			this.startDate = Number(this.startDate)
 		}
 	}
 })

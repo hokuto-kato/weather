@@ -9,7 +9,7 @@ export const useStore = defineStore({
 		}
 	},
 	actions: {
-		setLatLng(latlng: object) {
+		async setLatLng(latlng: object) {
 			this.latlng = latlng
 		}
 	}

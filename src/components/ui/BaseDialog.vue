@@ -18,6 +18,11 @@ const closeDialog = () => {
 </template>
 
 <style lang="sass" scoped>
+.icon__close
+	position: absolute
+	top: 0
+	right: 0
+	cursor: pointer
 .overlay
 	position: fixed
 	top: 0
@@ -30,15 +35,15 @@ const closeDialog = () => {
 	position: fixed
 	inset: 0
 	margin: auto
-	width: 80vw
-	min-height: 100px
-	border-radius: 0.375rem
-	border: none
+	width: 90vw
+	height: max-content
 	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)
 	padding: 16px
-	overflow: hidden
 	background-color: #fff
 	z-index: 3
+	border-radius: 0.375rem
+	+mq-min($pad)
+		width: 80vw
 	&-enter-from,
 	&-leave-to
 		opacity: 0
