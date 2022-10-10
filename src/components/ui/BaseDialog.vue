@@ -11,12 +11,7 @@ const closeDialog = () => {
 		<div v-if="props.show" @click="closeDialog" class="overlay"></div>
 		<transition name="dialog">
 			<dialog open class="dialog" v-if="props.show">
-				<header>
-					<slot name="header"></slot>
-				</header>
-				<section>
-					<slot name="body"></slot>
-				</section>
+				<slot></slot>
 			</dialog>
 		</transition>
 	</teleport>

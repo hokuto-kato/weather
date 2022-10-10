@@ -1,33 +1,38 @@
 <script lang="ts" setup>
 import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet'
 import { useCurrentWeatherStore } from '@/stores/currentWeather'
+import { useHourlyForecastStore } from '@/stores/hourlyForecast'
 import { useStore } from '@/stores/global'
 import 'leaflet/dist/leaflet.css'
 import { ref } from 'vue'
+import CurrentWeather from '@/components/CurrentWeather.vue'
+import HourlyForecast from '@/components/HourlyForecast.vue'
 
 const globalStore = useStore()
 const cw = useCurrentWeatherStore()
+const df = useHourlyForecastStore()
 const show = ref(false)
-const showWeather = (e: { latlng: object }) => {
+const showWeather = async (e: { latlng: object }) => {
 	if (!e.latlng) return
-	globalStore.setLatLng(e.latlng)
-	cw.setCurrentWeather()
 	show.value = true
+	globalStore.setLatLng(e.latlng)
+	await cw.setCurrentWeather()
+	await df.setHourlyForecast()
+	df.setTemperatures()
 }
 const closeDialog = () => {
 	show.value = false
 	cw.clearCurrentWeather()
+	df.clearHourlyForecast()
 }
 </script>
 
 <template>
 	<base-dialog :show="show" @closeDialog="closeDialog">
-		<template #header>
-			<h2>{{ cw.current.name }}</h2>
-		</template>
-		<template #body>
-			<p>{{ cw.current }}</p>
-		</template>
+		<section>
+			<current-weather></current-weather>
+			<hourly-forecast></hourly-forecast>
+		</section>
 	</base-dialog>
 	<l-map
 		style="height: 100vh; width: 100vw"
