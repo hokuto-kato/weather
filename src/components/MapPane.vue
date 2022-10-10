@@ -41,6 +41,11 @@ const closeDialog = () => {
 		:fade-animation="true"
 		:zoom="1"
 		:zoom-control="false"
+		:inertia="true"
+		:inertiaDeceleration="3000"
+		:inertiaMaxSpeed="1500"
+		:easeLinearity="0.2"
+		:maxBoundsViscosity="0.0"
 		@click="showWeather"
 	>
 		<l-tile-layer
