@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"target": "ESNext",
+		"types": ["vite/client"],
 		"useDefineForClassFields": true,
 		"module": "ESNext",
 		"moduleResolution": "Node",

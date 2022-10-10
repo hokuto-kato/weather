@@ -5,9 +5,19 @@ export const useHourlyForecastStore = defineStore({
 	id: 'hourly',
 	state: () => {
 		return {
-			hourly: {},
-			temperatures: [],
-			startDate: ''
+			hourly: {
+				city: {},
+				cnt: 0,
+				cod: '',
+				list: [
+					{
+						dt: 0
+					}
+				],
+				message: 0
+			},
+			temperatures: [] as number[],
+			startDate: 0
 		}
 	},
 	actions: {
@@ -22,14 +32,19 @@ export const useHourlyForecastStore = defineStore({
 			this.hourly = responseData
 		},
 		clearHourlyForecast() {
-			this.hourly = {}
+			this.hourly = {
+				city: {},
+				cnt: 0,
+				cod: '',
+				list: [],
+				message: 0
+			}
 		},
 		async setTemperatures() {
 			this.temperatures = this.hourly.list.map(
-				(item) => item.main.feels_like
+				(item: any) => item.main.feels_like
 			)
-			this.startDate = `${this.hourly.list[0].dt}000`
-			this.startDate = Number(this.startDate)
+			this.startDate = this.hourly.list[0].dt * 1000
 		}
 	}
 })

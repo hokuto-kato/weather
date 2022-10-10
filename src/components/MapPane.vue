@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// @ts-ignore
 import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet'
 import { useCurrentWeatherStore } from '@/stores/currentWeather'
 import { useHourlyForecastStore } from '@/stores/hourlyForecast'
@@ -12,10 +13,10 @@ const globalStore = useStore()
 const cw = useCurrentWeatherStore()
 const df = useHourlyForecastStore()
 const show = ref(false)
-const showWeather = async (e: { latlng: object }) => {
+const showWeather = async (e: any) => {
 	if (!e.latlng) return
 	show.value = true
-	globalStore.setLatLng(e.latlng)
+	await globalStore.setLatLng(e.latlng)
 	await cw.setCurrentWeather()
 	await df.setHourlyForecast()
 	await df.setTemperatures()

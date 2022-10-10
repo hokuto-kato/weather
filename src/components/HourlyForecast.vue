@@ -36,8 +36,9 @@ const chartOptions = computed(() => {
 		},
 		yAxis: {
 			labels: {
-				formatter() {
-					return this.value + '°C'
+				formatter(): any {
+					// @ts-ignore
+					return `${this.value}°C`
 				}
 			},
 			alignTicks: false,
