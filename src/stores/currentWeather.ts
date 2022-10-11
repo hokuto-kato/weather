@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { useStore } from '@/stores/global'
 
 const initialCurrentWeather = {
@@ -56,8 +56,9 @@ export const useCurrentWeatherStore = defineStore({
 	},
 	actions: {
 		async setCurrentWeather() {
-			const { latlng, key } = useStore()
-			const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lng}&units=metric&appid=${key}`
+			const globalStore = useStore()
+			const { getLng, getLat, getKey } = storeToRefs(globalStore)
+			const url = `https://api.openweathermap.org/data/2.5/weather?lat=${getLat.value}&lon=${getLng.value}&units=metric&appid=${getKey.value}`
 			const response = await fetch(url)
 			const responseData = await response.json()
 			if (!response.ok) {
@@ -66,7 +67,25 @@ export const useCurrentWeatherStore = defineStore({
 			this.current = responseData
 		},
 		clearCurrentWeather() {
-			this.current = initialCurrentWeather
+			this.$reset()
+		}
+	},
+	getters: {
+		getName(): string {
+			if (this.current.name !== '' && this.current.sys.country !== '') {
+				return `${this.current.name}, ${this.current.sys.country}`
+			} else {
+				return 'no data were available'
+			}
+		},
+		getIcon(): string {
+			return `http://openweathermap.org/img/wn/${this.current.weather[0].icon}@2x.png`
+		},
+		getWeather(): string {
+			return this.current.weather[0].description
+		},
+		getTemperature(): number {
+			return this.current.main.feels_like
 		}
 	}
 })

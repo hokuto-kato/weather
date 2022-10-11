@@ -12,8 +12,20 @@ export const useStore = defineStore({
 		}
 	},
 	actions: {
-		async setLatLng(latlng: any) {
-			this.latlng = latlng
+		async setLatLng(lat: number, lng: number) {
+			this.latlng.lat = lat
+			this.latlng.lng = lng
+		}
+	},
+	getters: {
+		getLat(): number {
+			return this.latlng.lat
+		},
+		getLng(): number {
+			return this.latlng.lng
+		},
+		getKey(): string {
+			return this.key
 		}
 	}
 })

@@ -2,7 +2,9 @@
 import { computed } from 'vue'
 import { Chart } from 'highcharts-vue'
 import { useHourlyForecastStore } from '@/stores/hourlyForecast'
+import { storeToRefs } from 'pinia'
 const df = useHourlyForecastStore()
+const { getTemperatures, getStartDate } = storeToRefs(df)
 const chartOptions = computed(() => {
 	return {
 		chart: {
@@ -18,8 +20,8 @@ const chartOptions = computed(() => {
 		series: [
 			{
 				name: 'temperature',
-				data: df.temperatures,
-				pointStart: df.startDate,
+				data: getTemperatures.value,
+				pointStart: getStartDate.value,
 				pointInterval: 3600 * 3000
 			}
 		],

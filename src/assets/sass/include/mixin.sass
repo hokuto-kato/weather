@@ -4,3 +4,7 @@
 =mq-max($breakpoint)
 	@media screen and (max-width: $breakpoint)
 		@content
+=hover
+	@media (any-hover: hover) and (any-pointer: fine)
+		&:hover
+			@content

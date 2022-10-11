@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { useStore } from '@/stores/global'
 
 export const useHourlyForecastStore = defineStore({
@@ -22,8 +22,9 @@ export const useHourlyForecastStore = defineStore({
 	},
 	actions: {
 		async setHourlyForecast() {
-			const { latlng, key } = useStore()
-			const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latlng.lat}&lon=${latlng.lng}&units=metric&appid=${key}`
+			const globalStore = useStore()
+			const { getLng, getLat, getKey } = storeToRefs(globalStore)
+			const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${getLat.value}&lon=${getLng.value}&units=metric&appid=${getKey.value}`
 			const response = await fetch(url)
 			const responseData = await response.json()
 			if (!response.ok) {
@@ -32,19 +33,21 @@ export const useHourlyForecastStore = defineStore({
 			this.hourly = responseData
 		},
 		clearHourlyForecast() {
-			this.hourly = {
-				city: {},
-				cnt: 0,
-				cod: '',
-				list: [],
-				message: 0
-			}
+			this.$reset()
 		},
 		async setTemperatures() {
 			this.temperatures = this.hourly.list.map(
-				(item: any) => item.main.feels_like
+				(item: any) => item.main?.feels_like
 			)
 			this.startDate = this.hourly.list[0].dt * 1000
+		}
+	},
+	getters: {
+		getTemperatures(): number[] {
+			return this.temperatures
+		},
+		getStartDate(): number {
+			return this.startDate
 		}
 	}
 })
