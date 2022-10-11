@@ -11,6 +11,12 @@ const closeDialog = () => {
 		<div v-if="props.show" @click="closeDialog" class="overlay"></div>
 		<transition name="dialog">
 			<dialog open class="dialog" v-if="props.show">
+				<font-awesome-icon
+					icon="fa-xmark"
+					class="dialog__close"
+					size="lg"
+					@click="closeDialog"
+				/>
 				<slot></slot>
 			</dialog>
 		</transition>
@@ -18,11 +24,6 @@ const closeDialog = () => {
 </template>
 
 <style lang="sass" scoped>
-.icon__close
-	position: absolute
-	top: 0
-	right: 0
-	cursor: pointer
 .overlay
 	position: fixed
 	top: 0
@@ -35,15 +36,25 @@ const closeDialog = () => {
 	position: fixed
 	inset: 0
 	margin: auto
-	width: 90vw
-	height: max-content
+	width: 100vw
+	height: -webkit-fill-available
 	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)
 	padding: 16px
 	background-color: #fff
 	z-index: 3
-	border-radius: 0.375rem
+	overflow: scroll
 	+mq-min($pad)
 		width: 80vw
+		border-radius: 0.375rem
+		height: max-content
+	&__close
+		position: absolute
+		top: 8px
+		right: 13px
+		cursor: pointer
+		transition: opacity 0.2s ease-out
+		+hover()
+			opacity: .8
 	&-enter-from,
 	&-leave-to
 		opacity: 0

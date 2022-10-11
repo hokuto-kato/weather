@@ -15,25 +15,38 @@ const df = useHourlyForecastStore()
 const show = ref(false)
 const showWeather = async (e: any) => {
 	if (!e.latlng) return
+	cw.clearCurrentWeather()
+	df.clearHourlyForecast()
 	show.value = true
-	await globalStore.setLatLng(e.latlng)
-	await cw.setCurrentWeather()
-	await df.setHourlyForecast()
+	try {
+		await globalStore.setLatLng(e.latlng.lat, e.latlng.lng)
+	} catch (err) {
+		console.log(err)
+	}
+
+	try {
+		await cw.setCurrentWeather()
+	} catch (err) {
+		console.log(err)
+	}
+
+	try {
+		await df.setHourlyForecast()
+	} catch (err) {
+		console.log(err)
+	}
+
 	await df.setTemperatures()
 }
 const closeDialog = () => {
 	show.value = false
-	cw.clearCurrentWeather()
-	df.clearHourlyForecast()
 }
 </script>
 
 <template>
 	<base-dialog :show="show" @closeDialog="closeDialog">
-		<section>
-			<current-weather></current-weather>
-			<hourly-forecast></hourly-forecast>
-		</section>
+		<current-weather></current-weather>
+		<hourly-forecast></hourly-forecast>
 	</base-dialog>
 	<l-map
 		style="height: 100vh; width: 100vw"
